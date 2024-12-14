@@ -12,7 +12,7 @@
 function renderCard() {
     const placesList = document.querySelector('.places__list');
     initialCards.forEach(({name,link,alt}) => {
-       const card = addCard({name,link,alt});
+       const card = addCard({name,link,alt}, deleteCard);
        placesList.append(card);
     });
 }
@@ -26,13 +26,13 @@ function addCard ({name,link}, deleteCard) {
     cardElement.querySelector('.card__image').alt = name;
     cardElement.querySelector('.card__title').textContent = name;
     
-    deleteButton.addEventListener('click', deleteCard);
-
-    function deleteCard() {
-        cardElement.remove();
-    }
+    deleteButton.addEventListener('click', () => deleteCard(cardElement));
 
     return cardElement;
+}
+
+function deleteCard(cardElement) {
+    cardElement.remove();
 }
 
 renderCard();
