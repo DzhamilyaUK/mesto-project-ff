@@ -1,5 +1,16 @@
+// @todo: Темплейт карточки
+
+// @todo: DOM узлы
+
+// @todo: Функция создания карточки
+
+// @todo: Функция удаления карточки
+
+// @todo: Вывести карточки на страницу
+
+
 import './pages/index.css';
-import { initialCards } from './scripts/cards';
+import { initialCards } from '../scripts/cards.js';
 
 function renderCard() {
     const placesList = document.querySelector('.places__list');
