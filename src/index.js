@@ -16,34 +16,30 @@ const popupEditProfile = document.querySelector('.popup_type_edit');
 const popupAddCard = document.querySelector('.popup_type_new-card');
 const popupImage = document.querySelector('.popup_type_image');
 
-const profileTitle = document.querySelector('.profile__title'); // Элемент с именем
-const profileDescription = document.querySelector('.profile__description'); // Элемент с информацией о себе
+// Выносим поиск элементов формы редактирования профиля
+const nameInput = popupEditProfile.querySelector('.popup__input_type_name');
+const descriptionInput = popupEditProfile.querySelector('.popup__input_type_description');
+
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
 
 // Обработчик открытия попапа редактирования профиля
 editButton.addEventListener('click', () => {
-  // Заполняем поля формы текущими значениями
-  const nameInput = popupEditProfile.querySelector('.popup__input_type_name');
-  const descriptionInput = popupEditProfile.querySelector('.popup__input_type_description');
-
+  // Используем уже найденные элементы
   nameInput.value = profileTitle.textContent;
   descriptionInput.value = profileDescription.textContent;
-
   openPopup(popupEditProfile);
 });
 
 // Обработчик отправки формы редактирования профиля
 const editProfileForm = popupEditProfile.querySelector('.popup__form');
 editProfileForm.addEventListener('submit', (event) => {
-  event.preventDefault(); // Отменяем стандартное поведение формы
-
-  // Обновляем данные на странице
-  const nameInput = popupEditProfile.querySelector('.popup__input_type_name');
-  const descriptionInput = popupEditProfile.querySelector('.popup__input_type_description');
-
+  event.preventDefault();
+  
+  // Используем уже найденные элементы
   profileTitle.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
-
-  closePopup(popupEditProfile); // Закрываем попап
+  closePopup(popupEditProfile);
 });
 
 addCardButton.addEventListener('click', () => {
@@ -65,37 +61,6 @@ function openImagePopup(link, name) {
 
   openPopup(popupImage);
 }
-
-
-// Находим форму в DOM
-const formElement = document.querySelector('.popup_type_edit .popup__form');
-
-// Находим поля формы в DOM
-const nameInput = formElement.querySelector('.popup__input_type_name');
-const jobInput = formElement.querySelector('.popup__input_type_description');
-
-// Обработчик «отправки» формы
-function handleFormSubmit(evt) {
-    evt.preventDefault(); // Отменяем стандартную отправку формы
-    
-    // Получаем значения полей
-    const nameValue = nameInput.value;
-    const jobValue = jobInput.value;
-
-    // Находим элементы профиля на странице
-    const profileName = document.querySelector('.profile__title');
-    const profileJob = document.querySelector('.profile__description');
-
-    // Вставляем новые значения
-    profileName.textContent = nameValue;
-    profileJob.textContent = jobValue;
-
-    // Закрываем попап (добавляем эту логику, так как она требуется по заданию)
-    const popup = formElement.closest('.popup');
-    closePopup(popup);
-}
-// Прикрепляем обработчик к форме
-formElement.addEventListener('submit', handleFormSubmit);
 
 
 // Находим элементы попапа добавления карточки
