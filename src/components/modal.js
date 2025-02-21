@@ -19,7 +19,7 @@ export const closePopup = (popup) => {
 };
 
   //добавляем слушатель события
-export const addListener = (popup) => {
+export const addPopupCloseByClickListeners = (popup) => {
    const closer= popup.querySelector('.popup__close');
     closer.addEventListener('click', () => {
       closePopup(popup);

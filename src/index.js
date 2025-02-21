@@ -1,11 +1,11 @@
 import './pages/index.css';
 import { initialCards } from './scripts/cards';
-import { addCard, deleteCard, likeCard } from './components/card';
-import { handleEscKeyUp, openPopup, closePopup, addListener } from './components/modal';
+import { createCard, deleteCard, likeCard } from './components/card';
+import { handleEscKeyUp, openPopup, closePopup, addPopupCloseByClickListeners } from './components/modal';
 
 const placesList = document.querySelector('.places__list');
 initialCards.forEach(({ name, link }) => {
-  const card = addCard({ name, link }, deleteCard, likeCard, openImagePopup);
+  const card = createCard({ name, link }, deleteCard, likeCard, openImagePopup);
   placesList.append(card);
 });
 
@@ -46,9 +46,9 @@ addCardButton.addEventListener('click', () => {
   openPopup(popupAddCard);
 });
 
-addListener(popupEditProfile);
-addListener(popupAddCard);
-addListener(popupImage);
+addPopupCloseByClickListeners(popupEditProfile);
+addPopupCloseByClickListeners(popupAddCard);
+addPopupCloseByClickListeners(popupImage);
 
 // Функция для открытия попапа с изображением
 function openImagePopup(link, name) {
