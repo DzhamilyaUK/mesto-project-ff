@@ -7,10 +7,13 @@ export const handleEscKeyUp = (e) => {
   
 // Открытие модального окна
 export const openPopup = (popup) => {
-    popup.classList.add('popup_is-opened');
-    document.addEventListener('keyup', handleEscKeyUp);   
+  if (!popup) { // Проверка на null/undefined
+    console.error('Ошибка: Передан несуществующий попап в openPopup');
+    return;
+  }
+  popup.classList.add('popup_is-opened');
+  document.addEventListener('keyup', handleEscKeyUp);
 };
-
 
 // Закрытие модального окна
 export const closePopup = (popup) => {
@@ -19,15 +22,22 @@ export const closePopup = (popup) => {
 };
 
   //добавляем слушатель события
-export const addPopupCloseByClickListeners = (popup) => {
-   const closer= popup.querySelector('.popup__close');
-    closer.addEventListener('click', () => {
-      closePopup(popup);
-    });
-     //закрытие попапа кликом по оверлею
+  export const addPopupCloseByClickListeners = (popup) => {
+    // Находим кнопку закрытия внутри попапа
+    const closeButton = popup.querySelector('.popup__close');
+    
+    // Проверяем существование элемента
+    if (closeButton) {
+      // Закрытие по клику на крестик
+      closeButton.addEventListener('click', () => closePopup(popup));
+    } else {
+      console.error('Кнопка закрытия не найдена в попапе:', popup);
+    }
+  
+    // Закрытие по клику на оверлей
     popup.addEventListener('mousedown', (event) => {
-        if (event.target.classList.contains('popup')) {
+      if (event.target === popup) { // Более точная проверка
         closePopup(popup);
       }
     });
-  }
+  };
