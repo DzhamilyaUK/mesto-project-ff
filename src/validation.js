@@ -80,14 +80,14 @@ function setEventListeners(formElement, config) {
   });
 }
 
-function enableValidation(config) {
+export function enableValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
       setEventListeners(formElement, config);
   });
 }
 
-function clearValidation(formElement, config) {
+export function clearValidation(formElement, config) {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
   inputList.forEach((inputElement) => {
@@ -95,5 +95,3 @@ function clearValidation(formElement, config) {
   });
   toggleButtonState(inputList, buttonElement, config);
 }
-
-export { enableValidation, clearValidation, validationConfig };
