@@ -31,9 +31,14 @@
   margin-top: 5px;
 }
 
-.popup__input-error_visible {
-  visibility: visible; /* Показываем сообщение, если оно есть */
-}
+.popup__error_visible {
+  visibility: visible;
+  color: red;
+  font-size: 12px;
+}/* Показываем сообщение, если оно есть */
+
+   
+  
 
 .popup__save-button_disabled {
   background-color: #FFFFFF; /* Цвет неактивной кнопки из макета */

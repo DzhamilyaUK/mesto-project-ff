@@ -19,6 +19,23 @@
   cursor: pointer;
 }
 
+.popup__button:hover {
+  background: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+/*Неактивное состояние*/
+.popup__button_disabled {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.popup__button_disabled:hover {
+  cursor: default;
+  background-color: transparent;
+}
+
 @media screen and (max-width: 568px) {
   .popup__button {
     font-size: 14px;

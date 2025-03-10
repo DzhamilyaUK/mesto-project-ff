@@ -1,43 +1,40 @@
-export const handleEscKeyUp = (e) => {
-  if (e.key === 'Escape') {
-    const popup = document.querySelector('.popup_is-opened'); // находим открытый попап
-    closePopup(popup);
-  }
-};
-  
-// Открытие модального окна
-export const openPopup = (popup) => {
-  if (!popup) { // Проверка на null/undefined
-    console.error('Ошибка: Передан несуществующий попап в openPopup');
-    return;
-  }
-  popup.classList.add('popup_is-opened');
-  document.addEventListener('keyup', handleEscKeyUp);
-};
+function openPopup(modal) {
+  modal.classList.add('popup_is-animated');
+  document.addEventListener('keydown', handleEscClose);
+  setTimeout(() => {
+      modal.classList.add('popup_is-opened');
+  }, 0);
+}
 
-// Закрытие модального окна
-export const closePopup = (popup) => {
-  popup.classList.remove('popup_is-opened');
-  document.removeEventListener('keyup', handleEscKeyUp);
-};
+function closePopup(modal) {
+  modal.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', handleEscClose);
+  modal.addEventListener('transitionend', function handleTransitionEnd() {
+      modal.classList.remove('popup_is-animated');
+      modal.removeEventListener('transitionend', handleTransitionEnd);
+  });
+}
 
-  //добавляем слушатель события
-  export const addPopupCloseByClickListeners = (popup) => {
-    // Находим кнопку закрытия внутри попапа
-    const closeButton = popup.querySelector('.popup__close');
-    
-    // Проверяем существование элемента
-    if (closeButton) {
-      // Закрытие по клику на крестик
-      closeButton.addEventListener('click', () => closePopup(popup));
-    } else {
-      console.error('Кнопка закрытия не найдена в попапе:', popup);
-    }
-  
-    // Закрытие по клику на оверлей
-    popup.addEventListener('mousedown', (event) => {
-      if (event.target === popup) { // Более точная проверка
-        closePopup(popup);
+function handleEscClose(evt) {
+  if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_is-opened');
+      if (openedPopup) {
+          closePopup(openedPopup);
       }
-    });
-  };
+  }
+}
+
+function closeModalOnOverlayClick(modal) {
+  modal.addEventListener('mousedown', (evt) => {
+      if (evt.target === modal) {
+          closePopup(modal);
+      }
+  });
+}
+
+function addCloseButtonHandler(modal) {
+  const closeButton = modal.querySelector('.popup__close');
+  closeButton.addEventListener('click', () => closePopup(modal));
+}
+
+export {openPopup, closePopup, closeModalOnOverlayClick, addCloseButtonHandler}

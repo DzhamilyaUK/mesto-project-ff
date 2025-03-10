@@ -10,6 +10,50 @@
   object-fit: cover; /* Сохраняет пропорции изображения */
 }
 
+/* Затемнение при наведении */
+.profile__image-container:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Затемнение через ::before */
+.profile__image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачное затемнение */
+  border-radius: 10%;
+  opacity: 0; /* Скрыто по умолчанию */
+  transition: opacity 0.3s ease; /* Плавное появление */
+  z-index: 1; /* Поверх изображения */
+}
+
+/* Иконка редактирования через ::after */
+.profile__image::after {
+  content: '';
+  position: absolute;
+  top: 46%;
+  left: 7%;
+  width: 30px;
+  height: 30px;
+  background: url('../../../images/edit-icon.svg') no-repeat center;
+  background-size: contain;
+  transform: translate(-50%, -50%);
+  filter: brightness(0) invert(1); /* Белая иконка */
+  opacity: 0; /* Скрыто по умолчанию */
+  transition: opacity 0.3s ease; /* Плавное появление */
+  z-index: 2; /* Поверх затемнения */
+}
+
+/* Эффект при наведении */
+.profile__image:hover::before,
+.profile__image:hover::after {
+  opacity: 1; /* Показываем затемнение и иконку */
+}
+
+
 @media screen and (max-width: 740px) {
   .profile__image {
     margin: 0 10px 0 0;
