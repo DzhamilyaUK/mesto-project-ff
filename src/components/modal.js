@@ -1,5 +1,4 @@
 function openPopup(modal) {
-  modal.classList.add('popup_is-animated');
   document.addEventListener('keydown', handleEscClose);
   setTimeout(() => {
       modal.classList.add('popup_is-opened');
@@ -10,8 +9,7 @@ function closePopup(modal) {
   modal.classList.remove('popup_is-opened');
   document.removeEventListener('keydown', handleEscClose);
   modal.addEventListener('transitionend', function handleTransitionEnd() {
-      modal.classList.remove('popup_is-animated');
-      modal.removeEventListener('transitionend', handleTransitionEnd);
+       modal.removeEventListener('transitionend', handleTransitionEnd);
   });
 }
 
