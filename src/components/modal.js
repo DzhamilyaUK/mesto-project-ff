@@ -1,8 +1,6 @@
 function openPopup(modal) {
   document.addEventListener('keydown', handleEscClose);
-  setTimeout(() => {
-      modal.classList.add('popup_is-opened');
-  }, 0);
+  modal.classList.add('popup_is-opened');
 }
 
 function closePopup(modal) {
