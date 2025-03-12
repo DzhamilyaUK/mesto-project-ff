@@ -6,9 +6,6 @@ function openPopup(modal) {
 function closePopup(modal) {
   modal.classList.remove('popup_is-opened');
   document.removeEventListener('keydown', handleEscClose);
-  modal.addEventListener('transitionend', function handleTransitionEnd() {
-       modal.removeEventListener('transitionend', handleTransitionEnd);
-  });
 }
 
 function handleEscClose(evt) {
